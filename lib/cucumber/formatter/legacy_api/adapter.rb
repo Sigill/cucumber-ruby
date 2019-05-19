@@ -236,6 +236,7 @@ module Cucumber
             @current_test_step_source = TestStepSource.for(test_step, result)
             # TODO: stop calling self, and describe source to another object
             test_step.describe_source_to(self, result)
+            result.embeddings.each { |e| embed(e['src'], e['mime_type'], e['label']) } if result.respond_to?(:embeddings)
             print_step
             @test_step_results << result
           end
